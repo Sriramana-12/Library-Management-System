@@ -1,0 +1,60 @@
+# Library Management System
+
+DBMS Capstone Project - Aditya University, Department of AI & ML
+
+## Team Members
+
+| S.No | Student Name | Roll Number |
+|------|-------------|-------------|
+| 1 | M. Sri Ramana | 25B11AI704 |
+| 2 | K. Chandru | 25B11AI465 |
+| 3 | G. Suhas | 25B11AI384 |
+| 4 | A. Datta Sri Sai | 25B11AI049 |
+
+## Faculty Coordinator
+Mrs. V. G. L. Narasamba
+
+## Academic Year
+2026-27
+
+## Technologies Used
+
+- **Database:** PostgreSQL
+- **Admin Tool:** pgAdmin 4
+- **Frontend:** HTML, CSS, JavaScript (planned)
+- **Backend:** Python, SQL
+- **IDE:** Visual Studio Code
+
+## Database Schema
+
+The database includes the following tables:
+- publishers
+- categories
+- authors
+- books
+- book_authors
+- book_copies
+- members
+- staff
+- loans
+- reservations
+- fines
+
+## How to Run
+
+1. Install PostgreSQL
+2. Open pgAdmin or psql
+3. Execute `database/library_management.sql`
+4. Run queries from `database/queries.sql`
+
+## Project Documentation
+
+See `documentation/` folder for the complete project report.
+
+## Screenshots
+
+See `screenshots/` folder for database output samples.
+
+## License
+
+Educational use only.
