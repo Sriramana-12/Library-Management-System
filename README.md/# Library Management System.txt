@@ -5,16 +5,18 @@ DBMS Capstone Project - Aditya University, Department of AI & ML
 ## Team Members
 
 | S.No | Student Name | Roll Number |
-|------|-------------|-------------|
+|------|--------------|-------------|
 | 1 | M. Sri Ramana | 25B11AI704 |
 | 2 | K. Chandru | 25B11AI465 |
 | 3 | G. Suhas | 25B11AI384 |
 | 4 | A. Datta Sri Sai | 25B11AI049 |
 
 ## Faculty Coordinator
+
 Mrs. V. G. L. Narasamba
 
 ## Academic Year
+
 2026-27
 
 ## Technologies Used
@@ -28,6 +30,7 @@ Mrs. V. G. L. Narasamba
 ## Database Schema
 
 The database includes the following tables:
+
 - publishers
 - categories
 - authors
@@ -40,20 +43,31 @@ The database includes the following tables:
 - reservations
 - fines
 
-## How to Run
+## Project Explanation Video
 
-1. Install PostgreSQL
-2. Open pgAdmin or psql
-3. Execute `database/library_management.sql`
-4. Run queries from `database/queries.sql`
+https://drive.google.com/file/d/15fPwB4dLsfnpUi7hfPas4bQFhIYeHfnq/view?usp=sharing
+## Project Explanation Video
+
+[Click here to watch the Library Management System project explanation video](https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz/view?usp=sharing)
+
+## PowerPoint Presentation
+
+[Click here to view the Library Management System PowerPoint presentation](PowerPoint/)
 
 ## Project Documentation
 
-See `documentation/` folder for the complete project report.
+[Click here to view the updated Library Management System project documentation](Documentation/)
 
 ## Screenshots
 
-See `screenshots/` folder for database output samples.
+[Click here to view database output screenshots](Screenshots/)
+
+## How to Run
+
+1. Install PostgreSQL.
+2. Open pgAdmin 4 or psql.
+3. Execute `database/library_management.sql`.
+4. Run queries from `database/queries.sql`.
 
 ## License
 
