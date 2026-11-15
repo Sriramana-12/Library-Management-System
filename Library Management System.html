@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Library Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--panel:#0e0e0e;--silver:#CDCBCA;--red:#D41514;--dim:rgba(205,203,202,.62);--line:rgba(205,203,202,.16);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--silver);font:500 17px/1.5 Rajdhani,"Segoe UI",system-ui,sans-serif;background-image:radial-gradient(900px 620px at 78% 28%,rgba(212,21,20,.16),transparent 62%)}
+h1,h2{margin:0;font-family:Orbitron,"Segoe UI",system-ui,sans-serif}
+.top{display:flex;align-items:center;gap:28px;padding:22px 40px}
+.brand{font:700 14px Orbitron,sans-serif;letter-spacing:.24em;display:flex;align-items:center;gap:10px}
+.brand::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
+.links{display:flex;gap:36px;margin:0 auto}
+.links button{background:none;border:0;border-bottom:1px solid transparent;color:var(--silver);font:600 11px Orbitron,sans-serif;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;padding:6px 0}
+.links button:hover{border-color:var(--red)}
+.pill{font:600 11px Orbitron,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);background:transparent;border:1px solid var(--red);border-radius:999px;padding:12px 24px;cursor:pointer;transition:background .15s,color .15s}
+.pill:hover{background:var(--red);color:#fff}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:20px;padding:20px 40px 36px;min-height:calc(100vh - 90px)}
+.tags{border-left:2px solid var(--red);padding-left:12px;font:500 11px/1.75 Orbitron,sans-serif;letter-spacing:.32em;color:var(--dim);margin-bottom:34px;width:fit-content}
+.big{font-weight:700;font-size:clamp(32px,5vw,66px);line-height:1.04;letter-spacing:.01em}
+.big em{font-style:normal;color:var(--red)}
+.sub{font:500 12px/1.9 Orbitron,sans-serif;letter-spacing:.28em;color:var(--dim);margin:28px 0 34px;max-width:400px;text-transform:uppercase}
+.hero .pill{padding:16px 36px}
+.foot{display:flex;gap:18px;margin-top:64px;font:500 10px Orbitron,sans-serif;letter-spacing:.26em;color:var(--dim)}
+.foot span+span{border-left:1px solid var(--line);padding-left:18px}
+.stage{position:relative;height:min(560px,62vw);perspective:1100px;display:grid;place-items:center;--rx:-12deg;--ry:20deg}
+.arc{position:absolute;width:88%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(212,21,20,.55);box-shadow:0 0 90px rgba(212,21,20,.22) inset}
+.arc.b{width:104%;border-color:rgba(212,21,20,.22);box-shadow:none}
+.orb{position:relative;width:58%;aspect-ratio:1;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease-out}
+.core{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle at 32% 26%,#CDCBCA 0,#8d8b8a 5%,#2a0606 28%,#D41514 54%,#080808 80%);box-shadow:0 0 70px rgba(212,21,20,.5),inset -24px -24px 56px rgba(0,0,0,.85)}
+.ring{position:absolute;inset:0;border-radius:50%;border:3px solid var(--silver);transform-style:preserve-3d;animation:r1 16s linear infinite}
+.ring.r2{inset:-7%;border:2px solid var(--red);animation:r2 22s linear infinite}
+.ring.r3{inset:7%;border:2px solid rgba(205,203,202,.45);animation:r3 12s linear infinite}
+@keyframes r1{from{transform:rotateY(72deg) rotateZ(0)}to{transform:rotateY(72deg) rotateZ(360deg)}}
+@keyframes r2{from{transform:rotateX(76deg) rotateZ(0)}to{transform:rotateX(76deg) rotateZ(-360deg)}}
+@keyframes r3{from{transform:rotateX(24deg) rotateY(0)}to{transform:rotateX(24deg) rotateY(360deg)}}
+.desk{padding:36px 40px 70px;border-top:1px solid var(--line)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+.kpi div{border:1px solid var(--line);background:var(--panel);padding:16px 18px;border-radius:14px}
+.kpi b{display:block;font:700 26px Orbitron,sans-serif}
+.kpi span{font:500 10px Orbitron,sans-serif;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
+.kpi .hot{border-color:rgba(212,21,20,.6)}.kpi .hot b{color:var(--red)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px}
+.tabs button{flex:none;background:transparent;border:1px solid var(--line);color:var(--silver);border-radius:999px;padding:8px 16px;font:600 11px Orbitron,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.tabs button:hover{border-color:var(--red)}
+.tabs button.on{border-color:var(--red);background:var(--red);color:#fff}
+.tabs small{margin-left:8px;opacity:.75;font:600 12px Rajdhani,sans-serif}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 18px}
+.bar h2{font-size:22px;letter-spacing:.12em;text-transform:uppercase;margin-right:auto}
+input,select{font:500 16px Rajdhani,sans-serif;color:var(--silver);background:#0a0a0a;border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-width:0}
+input[type=search]{border-radius:999px;padding:9px 20px;min-width:240px}
+option{background:#0e0e0e}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.btn{font:600 11px Orbitron,sans-serif;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--silver);padding:11px 20px;border-radius:999px;cursor:pointer;transition:background .15s,border-color .15s}
+.btn:hover{border-color:var(--red)}
+.btn.p{border-color:var(--red);background:var(--red);color:#fff}
+.btn.p:hover{background:#b11110}
+.btn.d{color:var(--red);border-color:rgba(212,21,20,.5)}
+.btn.s{padding:6px 13px;font-size:10px}
+form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+label{display:flex;flex-direction:column;gap:6px;font:600 10px Orbitron,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+label input,label select{width:100%;font:500 16px Rajdhani,sans-serif;letter-spacing:0;text-transform:none;color:var(--silver)}
+.acts{display:flex;gap:10px;margin-top:20px}
+.wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+table{border-collapse:collapse;width:100%}
+th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:600 10px Orbitron,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+tr:hover td{background:rgba(212,21,20,.07)}
+tr:last-child td{border-bottom:0}
+td.a{display:flex;gap:6px}
+.empty{padding:40px;color:var(--dim);text-align:center}
+.tag{display:inline-block;padding:1px 12px;border-radius:999px;border:1px solid var(--line);font-size:14px}
+.tag.bad{color:var(--red);border-color:var(--red)}
+#toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--red);color:#fff;font:600 12px Orbitron,sans-serif;letter-spacing:.06em;padding:12px 24px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw}
+#toast.show{opacity:1}
+.avail{padding:36px 40px 10px;border-top:1px solid var(--line)}
+.avail h2{font-size:22px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.avail input{width:100%;max-width:560px;padding:12px 22px;border-radius:999px}
+#ares{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-top:20px}
+#ares .empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:16px}
+.av{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.av header{display:flex;justify-content:space-between;gap:14px}
+.av h3{margin:0;font:600 15px Orbitron,sans-serif;letter-spacing:.06em}
+.av header p{margin:4px 0 0;color:var(--dim);font-size:15px}
+.av .n{text-align:right;flex:none}
+.av .n b{display:block;font:700 30px Orbitron,sans-serif}
+.av .n.out b{color:var(--red)}
+.av .n span{font-size:13px;color:var(--dim)}
+.av ul{list-style:none;margin:14px 0 0;padding:0}
+.av li{display:grid;grid-template-columns:64px auto 1fr;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.av .none{margin:12px 0 0;color:var(--dim);font-size:15px}
+.od{color:var(--red);font-weight:600}
+@media (max-width:860px){.avail{padding:26px 18px 6px}#ares{grid-template-columns:1fr}.av li{grid-template-columns:56px auto}.av li span:last-child{grid-column:1/-1}}
+@media (max-width:860px){.top{padding:14px 18px}.links{display:none}.brand{margin-right:auto}.hero{grid-template-columns:1fr;padding:10px 18px 24px;min-height:0}.stage{height:320px}.foot{margin-top:36px}.desk{padding:26px 18px 50px}input[type=search]{min-width:0;flex:1}}
+@media (prefers-reduced-motion:reduce){.ring{animation:none}.orb{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand">LIBRARY DESK</div>
+<nav class="links" aria-label="Sections"><button data-a="nav" data-e="book" data-s="1">Catalog</button><button data-a="nav" data-e="member" data-s="1">Members</button><button data-a="av">Availability</button><button data-a="nav" data-e="issue" data-s="1">Lending</button><button data-a="nav" data-e="fine" data-s="1">Fines</button></nav>
+<button class="pill" data-a="nav" data-e="issue" data-s="1">Issue a book</button></header>
+<section class="hero"><div>
+<div class="tags">BOOKS<br>MEMBERS<br>LENDING<br>RECORDS</div>
+<h1 class="big">THE NEXT<br><em>LIBRARY</em><br>INTERFACE</h1>
+<p class="sub">Management tools for a more organised shelf.</p>
+<button class="pill" data-a="nav" data-e="book" data-s="1">Explore now &rarr;</button>
+<div class="foot"><span>CATALOG</span><span>LEND</span><span>RETURN</span></div></div>
+<div class="stage" id="stage" aria-hidden="true"><div class="arc b"></div><div class="arc"></div><div class="orb"><div class="core"></div><div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div></div></div>
+</section>
+<section class="avail" id="avail"><h2>Check availability</h2><input id="aq" type="search" placeholder="Search by title, author, ISBN or shelf" aria-label="Check availability"><div id="ares" aria-live="polite"></div></section>
+<section class="desk" id="desk"><div id="kpi" class="kpi"></div><nav id="nav" class="tabs" aria-label="Records"></nav><div id="view"></div></section>
+<div id="toast" role="status"></div>
+<script>
+const T=(k,l,t,x)=>({k,l,t,x});
+const E={
+ book:{n:'Books',l:'title',f:[T('isbn','ISBN','t'),T('title','Title','t'),T('publisher_id','Publisher','f','publisher'),T('category_id','Category','f','category'),T('edition','Edition','t'),T('year','Year','n'),T('language','Language','t'),T('pages','Pages','n'),T('shelf','Shelf location','t')]},
+ copy:{n:'Book copies',p:'CP',f:[T('isbn','Book','f','book'),T('condition','Condition','s',['New','Good','Worn','Damaged']),T('status','Status','s',['Available','Issued','Lost','Damaged']),T('acquired','Acquired on','d'),T('price','Price','n'),T('supplier_id','Supplier','f','supplier')]},
+ author:{n:'Authors',p:'A',l:'name',f:[T('name','Name','t'),T('nationality','Nationality','t'),T('bio','Biography','t')]},
+ book_author:{n:'Book authors',p:'BA',f:[T('isbn','Book','f','book'),T('author_id','Author','f','author')]},
+ publisher:{n:'Publishers',p:'P',l:'name',f:[T('name','Name','t'),T('address','Address','t'),T('contact','Contact','t')]},
+ category:{n:'Categories',p:'C',l:'name',f:[T('name','Category name','t'),T('description','Description','t')]},
+ member:{n:'Members',p:'M',l:'name',f:[T('name','Name','t'),T('address','Address','t'),T('phone','Phone','t'),T('email','Email','t'),T('dob','Date of birth','d'),T('type','Membership type','s',['Student','Faculty','Public']),T('start','Starts on','d'),T('expiry','Expires on','d'),T('status','Status','s',['Active','Inactive'])]},
+ staff:{n:'Staff',p:'S',l:'name',f:[T('name','Name','t'),T('phone','Phone','t'),T('email','Email','t'),T('designation','Designation','t'),T('salary','Salary','n'),T('joined','Joining date','d'),T('username','Username','t')]},
+ issue:{n:'Issues',p:'I',f:[T('member_id','Member','f','member'),T('copy_id','Book copy','f','copy'),T('staff_id','Issued by','f','staff'),T('issue_date','Issue date','d'),T('due_date','Due date','d'),T('return_date','Return date','d'),T('status','Status','s',['Issued','Returned','Overdue'])]},
+ return:{n:'Returns',p:'R',f:[T('issue_id','Issue','f','issue'),T('return_date','Return date','d'),T('condition','Condition on return','s',['Good','Worn','Damaged']),T('fine','Fine amount','n')]},
+ fine:{n:'Fines',p:'F',f:[T('member_id','Member','f','member'),T('issue_id','Issue','f','issue'),T('amount','Amount','n'),T('reason','Reason','s',['Late','Damaged','Lost']),T('paid','Payment status','s',['Unpaid','Paid']),T('pay_date','Payment date','d')]},
+ reservation:{n:'Reservations',p:'RS',f:[T('member_id','Member','f','member'),T('isbn','Book','f','book'),T('date','Reserved on','d'),T('status','Status','s',['Pending','Fulfilled','Cancelled'])]},
+ supplier:{n:'Suppliers',p:'SU',l:'name',f:[T('name','Name','t'),T('address','Address','t'),T('contact','Contact','t')]}
+};
+const ORDER=['book','copy','author','book_author','publisher','category','member','staff','issue','return','fine','reservation','supplier'];
+const pk=en=>en==='book'?'isbn':'id';
+const today=(o=0)=>{const d=new Date();d.setDate(d.getDate()+o);return d.toISOString().slice(0,10)};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S,cur='book',edit=null,q='';
+function load(){try{const j=localStorage.getItem('lms-v3');if(j)return JSON.parse(j)}catch(e){}return null}
+function save(){try{localStorage.setItem('lms-v3',JSON.stringify(S))}catch(e){}}
+function add(en,r){if(en!=='book'){S.q[en]=(S.q[en]||0)+1;r.id=E[en].p+String(S.q[en]).padStart(3,'0')}S.d[en].push(r);return r}
+const find=(en,id)=>S.d[en].find(r=>r[pk(en)]===id);
+function seed(){
+ S={d:{},q:{}};ORDER.forEach(e=>S.d[e]=[]);
+ add('publisher',{name:'Orient Books',address:'Hyderabad',contact:'info@orient.example'});
+ add('category',{name:'Fiction',description:'Novels and stories'});add('category',{name:'Science',description:'Science and technology'});
+ add('author',{name:'R. K. Narayan',nationality:'Indian',bio:'Novelist of Malgudi'});add('author',{name:'Carl Sagan',nationality:'American',bio:'Astronomer and writer'});
+ add('supplier',{name:'City Book Traders',address:'Abids, Hyderabad',contact:'9000000000'});
+ add('book',{isbn:'9780226568',title:'Malgudi Days',publisher_id:'P001',category_id:'C001',edition:'1st',year:1943,language:'English',pages:240,shelf:'A-2'});
+ add('book',{isbn:'9780345539',title:'Cosmos',publisher_id:'P001',category_id:'C002',edition:'2nd',year:1980,language:'English',pages:396,shelf:'B-1'});
+ add('book_author',{isbn:'9780226568',author_id:'A001'});add('book_author',{isbn:'9780345539',author_id:'A002'});
+ ['9780226568','9780226568','9780345539'].forEach(i=>add('copy',{isbn:i,condition:'Good',status:'Available',acquired:today(-200),price:350,supplier_id:'SU001'}));
+ add('member',{name:'Asha Reddy',address:'Madhapur',phone:'9876543210',email:'asha@example.com',dob:'2003-04-12',type:'Student',start:today(-90),expiry:today(275),status:'Active'});
+ add('staff',{name:'Ravi Kumar',phone:'9123456780',email:'ravi@library.example',designation:'Librarian',salary:32000,joined:'2020-06-01',username:'ravi'});
+ add('publisher',{name:'Penguin House',address:'Gurugram',contact:'hello@penguin.example'});add('publisher',{name:'Universities Press',address:'Hyderabad',contact:'sales@up.example'});
+ add('category',{name:'History',description:'History and biography'});add('category',{name:'Technology',description:'Engineering and computing'});
+ add('author',{name:'Yuval Noah Harari',nationality:'Israeli',bio:'Historian and author'});add('author',{name:'A. P. J. Abdul Kalam',nationality:'Indian',bio:'Scientist and former President'});add('author',{name:'Jhumpa Lahiri',nationality:'American',bio:'Pulitzer Prize winning author'});
+ add('supplier',{name:'Sri Lakshmi Distributors',address:'Koti, Hyderabad',contact:'9000011111'});
+ add('book',{isbn:'9780099590',title:'Sapiens',publisher_id:'P002',category_id:'C003',edition:'1st',year:2011,language:'English',pages:498,shelf:'C-3'});
+ add('book',{isbn:'9788173711',title:'Wings of Fire',publisher_id:'P003',category_id:'C003',edition:'1st',year:1999,language:'English',pages:180,shelf:'C-4'});
+ add('book',{isbn:'9780618485',title:'The Namesake',publisher_id:'P002',category_id:'C001',edition:'1st',year:2003,language:'English',pages:304,shelf:'A-5'});
+ add('book_author',{isbn:'9780099590',author_id:'A003'});add('book_author',{isbn:'9788173711',author_id:'A004'});add('book_author',{isbn:'9780618485',author_id:'A005'});
+ [['9780099590','Issued'],['9780099590','Available'],['9788173711','Issued'],['9788173711','Available'],['9780618485','Available']].forEach(c=>add('copy',{isbn:c[0],condition:'Good',status:c[1],acquired:today(-120),price:450,supplier_id:'SU002'}));
+ add('member',{name:'Rahul Verma',address:'Gachibowli',phone:'9988776655',email:'rahul@example.com',dob:'2001-09-03',type:'Student',start:today(-60),expiry:today(305),status:'Active'});
+ add('member',{name:'Dr. Meera Nair',address:'Banjara Hills',phone:'9090909090',email:'meera@example.com',dob:'1985-01-20',type:'Faculty',start:today(-400),expiry:today(330),status:'Active'});
+ add('member',{name:'Imran Sheikh',address:'Secunderabad',phone:'9812345670',email:'imran@example.com',dob:'1995-07-15',type:'Public',start:today(-30),expiry:today(335),status:'Active'});
+ add('staff',{name:'Priya Sharma',phone:'9345678901',email:'priya@library.example',designation:'Assistant Librarian',salary:26000,joined:'2022-02-14',username:'priya'});
+ add('issue',{member_id:'M001',copy_id:'CP004',staff_id:'S001',issue_date:today(-20),due_date:today(-6),return_date:'',status:'Issued'});
+ add('issue',{member_id:'M002',copy_id:'CP006',staff_id:'S001',issue_date:today(-3),due_date:today(11),return_date:'',status:'Issued'});
+ add('issue',{member_id:'M003',copy_id:'CP001',staff_id:'S002',issue_date:today(-30),due_date:today(-16),return_date:today(-14),status:'Returned'});
+ add('return',{issue_id:'I003',return_date:today(-14),condition:'Good',fine:4});
+ add('fine',{member_id:'M003',issue_id:'I003',amount:4,reason:'Late',paid:'Paid',pay_date:today(-14)});
+ add('reservation',{member_id:'M004',isbn:'9780618485',date:today(-2),status:'Pending'});add('reservation',{member_id:'M002',isbn:'9780099590',date:today(-10),status:'Fulfilled'});
+ [['Macmillan Learning','Delhi','care@macmillan.example'],['Oxford Press India','Mumbai','orders@oxford.example'],['Hachette India','Gurugram','support@hachette.example']].forEach(x=>add('publisher',{name:x[0],address:x[1],contact:x[2]}));
+ [['Mathematics','Maths and aptitude'],['Literature','Classics and modern literature'],['Self help','Personal growth']].forEach(x=>add('category',{name:x[0],description:x[1]}));
+ [['Chetan Bhagat','Indian','Contemporary novelist'],['Arundhati Roy','Indian','Booker Prize winner'],['Ruskin Bond','Indian','Writer of the hills'],['Stephen Hawking','British','Theoretical physicist'],['Dale Carnegie','American','Self-improvement writer'],['Paulo Coelho','Brazilian','Novelist'],['Sudha Murty','Indian','Author and philanthropist'],['R. S. Aggarwal','Indian','Mathematics educator']].forEach(x=>add('author',{name:x[0],nationality:x[1],bio:x[2]}));
+ [['Deccan Book House','Charminar, Hyderabad','9000022222'],['Metro Publishers Supply','Kukatpally, Hyderabad','9000033333']].forEach(x=>add('supplier',{name:x[0],address:x[1],contact:x[2]}));
+ const BK=[['9788129135','Five Point Someone','P006','C001',2004,288,'A-6','A006'],['9780142437','The God of Small Things','P005','C006',1997,340,'D-1','A007'],['9780143333','The Blue Umbrella','P006','C001',1980,96,'A-7','A008'],['9780553380','A Brief History of Time','P002','C002',1988,256,'B-2','A009'],['9781982156','How to Win Friends and Influence People','P004','C007',1936,288,'E-1','A010'],['9780062315','The Alchemist','P006','C006',1988,208,'D-2','A011'],['9780143420','Wise and Otherwise','P006','C001',2002,224,'A-8','A012'],['9788121908','Quantitative Aptitude','P003','C005',1990,800,'F-1','A013'],['9780140449','Rusty the Boy from the Hills','P006','C001',1990,144,'A-9','A008'],['9780553293','The Universe in a Nutshell','P002','C002',2001,224,'B-3','A009'],['9788173712','Ignited Minds','P003','C004',2002,196,'C-5','A004'],['9780099287','Homo Deus','P002','C003',2015,450,'C-6','A003'],['9780143065','Interpreter of Maladies','P002','C001',1999,198,'A-10','A005'],['9780141439','The Guide','P001','C001',1958,220,'A-11','A001'],['9780679783','Contact','P002','C002',1985,430,'B-4','A002']];
+ BK.forEach(b=>{add('book',{isbn:b[0],title:b[1],publisher_id:b[2],category_id:b[3],edition:'1st',year:b[4],language:'English',pages:b[5],shelf:b[6]});add('book_author',{isbn:b[0],author_id:b[7]})});
+ [[0,'Available'],[1,'Issued'],[2,'Available'],[3,'Issued'],[4,'Available'],[5,'Issued'],[6,'Available'],[7,'Issued'],[8,'Available'],[9,'Available'],[10,'Issued'],[11,'Available'],[12,'Issued'],[13,'Available'],[14,'Available'],[0,'Available'],[3,'Available'],[5,'Lost']].forEach((c,i)=>add('copy',{isbn:BK[c[0]][0],condition:c[1]==='Lost'?'Worn':'Good',status:c[1],acquired:today(-90-i*7),price:250+c[0]*25,supplier_id:i%2?'SU003':'SU004'}));
+ ['Sneha Iyer|Student','Karthik Rao|Student','Fatima Begum|Faculty','Arjun Patel|Public','Divya Menon|Student','Naveen Goud|Student','Lakshmi Prasad|Faculty','Sai Teja|Student','Ananya Das|Public','Vikram Singh|Student'].forEach((m,i)=>{const n=m.split('|');add('member',{name:n[0],address:['Kondapur','Jubilee Hills','Tolichowki','Ameerpet','Begumpet','Kukatpally','Dilsukhnagar','Uppal','Miyapur','LB Nagar'][i]+', Hyderabad',phone:'9848'+(100000+i*7919),email:n[0].toLowerCase().replace(/[^a-z]+/g,'.')+'@example.com',dob:(1990+i%12)+'-0'+(1+i%9)+'-1'+(i%9),type:n[1],start:today(-80-i*20),expiry:today(285-i*20),status:i===8?'Inactive':'Active'})});
+ add('staff',{name:'Suresh Babu',phone:'9440011223',email:'suresh@library.example',designation:'Clerk',salary:22000,joined:'2021-08-09',username:'suresh'});
+ add('staff',{name:'Kavitha Reddy',phone:'9440022334',email:'kavitha@library.example',designation:'Library Assistant',salary:24000,joined:'2023-01-16',username:'kavitha'});
+ [['M005','CP010','S001',-23,-9,null],['M006','CP012','S002',-17,-3,null],['M007','CP014','S003',-9,5,null],['M008','CP016','S004',-5,9,null],['M009','CP019','S001',-2,12,null],['M010','CP021','S003',-15,-1,null],['M011','CP009','S002',-40,-26,-26],['M012','CP011','S004',-35,-21,-18],['M013','CP013','S001',-28,-14,-9],['M014','CP015','S003',-25,-11,-11]].forEach(x=>add('issue',{member_id:x[0],copy_id:x[1],staff_id:x[2],issue_date:today(x[3]),due_date:today(x[4]),return_date:x[5]===null?'':today(x[5]),status:x[5]===null?'Issued':'Returned'}));
+ [['I010',-26,'Worn',0],['I011',-18,'Good',6],['I012',-9,'Good',10],['I013',-11,'Damaged',50]].forEach(x=>add('return',{issue_id:x[0],return_date:today(x[1]),condition:x[2],fine:x[3]}));
+ [['M012','I011',6,'Late','Paid',-17],['M013','I012',10,'Late','Unpaid',null],['M014','I013',50,'Damaged','Unpaid',null]].forEach(x=>add('fine',{member_id:x[0],issue_id:x[1],amount:x[2],reason:x[3],paid:x[4],pay_date:x[5]===null?'':today(x[5])}));
+ [['M005',7,-4,'Pending'],['M006',4,-6,'Pending'],['M007',1,-8,'Fulfilled'],['M008',11,-3,'Pending'],['M010',5,-12,'Cancelled'],['M014',13,-1,'Pending']].forEach(x=>add('reservation',{member_id:x[0],isbn:BK[x[1]][0],date:today(x[2]),status:x[3]}));
+ save();
+}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('show'),2600)}
+function lbl(en,id){if(!id)return '–';const r=find(en,id);if(!r)return id+' (missing)';const l=E[en].l;return l?r[l]+' ('+id+')':id}
+const calc={
+ book:{Copies:r=>{const c=S.d.copy.filter(x=>x.isbn===r.isbn);return c.filter(x=>x.status==='Available').length+' of '+c.length+' available'}},
+ member:{'Open loans':r=>S.d.issue.filter(x=>x.member_id===r.id&&x.status!=='Returned').length}
+};
+function nav(){document.getElementById('nav').innerHTML=ORDER.map(e=>`<button data-a="nav" data-e="${e}" class="${e===cur?'on':''}">${E[e].n}<small>${S.d[e].length}</small></button>`).join('')}
+function input(f,v){
+ const n=`name="${f.k}"`;
+ if(f.t==='s')return `<select ${n}>${f.x.map(o=>`<option ${o===v?'selected':''}>${o}</option>`).join('')}</select>`;
+ if(f.t==='f')return `<select ${n} required><option value="">Choose…</option>${S.d[f.x].map(r=>`<option value="${esc(r[pk(f.x)])}" ${r[pk(f.x)]===v?'selected':''}>${esc(lbl(f.x,r[pk(f.x)]))}</option>`).join('')}</select>`;
+ return `<input ${n} type="${f.t==='n'?'number':f.t==='d'?'date':'text'}" ${f.t==='n'?'step="any"':''} value="${esc(v)}" ${f.k==='isbn'||f.k==='name'||f.k==='title'?'required':''}>`;
+}
+function defaults(en){const r={};E[en].f.forEach(f=>{r[f.k]=f.t==='s'?f.x[0]:f.t==='d'?(f.k==='due_date'?today(14):['dob','return_date','pay_date','expiry'].includes(f.k)?'':today()):''});return r}
+function form(){
+ const en=cur,isNew=edit==='new',r=isNew?defaults(en):find(en,edit);if(!r){edit=null;return ''}
+ return `<form id="f" data-id="${isNew?'':esc(edit)}"><div class="grid">${E[en].f.map(f=>`<label>${f.l}${input(f,r[f.k]).replace('required',f.k==='isbn'&&!isNew?'readonly':'required')}</label>`).join('')}</div><div class="acts"><button class="btn p">${isNew?'Add':'Save changes'}</button><button type="button" class="btn" data-a="cancel">Cancel</button></div></form>`;
+}
+function cell(en,f,v){
+ if(f.t==='f')return esc(lbl(f.x,v));
+ if(f.k==='status'||f.k==='paid'){const bad=(v==='Overdue'||v==='Unpaid'||v==='Lost'||v==='Damaged');return `<span class="tag ${bad?'bad':''}">${esc(v)}</span>`}
+ return esc(v);
+}
+function table(){
+ const en=cur,e=E[en],k=pk(en),cs=calc[en]||{};
+ const rows=S.d[en].filter(r=>!q||JSON.stringify(Object.values(r)).toLowerCase().includes(q));
+ if(!rows.length)return `<div class="wrap"><div class="empty">${S.d[en].length?'No records match your search.':'No '+e.n.toLowerCase()+' yet. Use Add to create the first one.'}</div></div>`;
+ const head=(en==='book'?'':'<th>ID</th>')+e.f.map(f=>`<th>${f.l}</th>`).join('')+Object.keys(cs).map(c=>`<th>${c}</th>`).join('')+'<th></th>';
+ const body=rows.map(r=>{
+  const od=en==='issue'&&r.status==='Issued'&&r.due_date<today();
+  return `<tr>${en==='book'?'':`<td>${esc(r.id)}</td>`}${e.f.map(f=>`<td>${cell(en,f,f.k==='status'&&od?'Overdue':r[f.k])}</td>`).join('')}${Object.values(cs).map(fn=>`<td>${fn(r)}</td>`).join('')}<td class="a">${en==='issue'&&r.status!=='Returned'?`<button class="btn s p" data-a="ret" data-id="${esc(r.id)}">Mark returned</button>`:''}${en==='fine'&&r.paid==='Unpaid'?`<button class="btn s p" data-a="pay" data-id="${esc(r.id)}">Mark paid</button>`:''}<button class="btn s" data-a="edit" data-id="${esc(r[k])}">Edit</button><button class="btn s d" data-a="del" data-id="${esc(r[k])}">Delete</button></td></tr>`}).join('');
+ return `<div class="wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+function avail(){
+ const el=document.getElementById('ares');if(!el)return;
+ const k=(document.getElementById('aq').value||'').trim().toLowerCase();
+ if(!k){el.innerHTML='<div class="empty">Type a title, author, ISBN or shelf to see copies, borrowers and due dates.</div>';return}
+ const au=id=>S.d.book_author.filter(x=>x.isbn===id).map(x=>(find('author',x.author_id)||{}).name||'').join(', ');
+ const bs=S.d.book.filter(b=>(b.title+' '+b.isbn+' '+b.shelf+' '+au(b.isbn)).toLowerCase().includes(k)).slice(0,8);
+ if(!bs.length){el.innerHTML='<div class="empty">No book matches that search.</div>';return}
+ const t=today();
+ el.innerHTML=bs.map(b=>{
+  const cs=S.d.copy.filter(c=>c.isbn===b.isbn),n=cs.filter(c=>c.status==='Available').length,rs=S.d.reservation.filter(r=>r.isbn===b.isbn&&r.status==='Pending').length;
+  const rows=cs.map(c=>{const i=S.d.issue.find(x=>x.copy_id===c.id&&x.status!=='Returned');let w='';
+   if(c.status==='Issued'&&i){const m=find('member',i.member_id);w='With '+esc(m?m.name:i.member_id)+', due '+esc(i.due_date)+(i.due_date<t?' <b class="od">overdue</b>':'')}
+   else if(c.status==='Available')w='On the shelf at '+esc(b.shelf);
+   return `<li><span>${esc(c.id)}</span><span class="tag ${c.status==='Lost'||c.status==='Damaged'?'bad':''}">${esc(c.status)}</span><span>${w}</span></li>`}).join('');
+  return `<article class="av"><header><div><h3>${esc(b.title)}</h3><p>${esc(au(b.isbn))}. ISBN ${esc(b.isbn)}. Shelf ${esc(b.shelf)}.</p></div><div class="n ${n?'':'out'}"><b>${n}</b><span>of ${cs.length} available</span></div></header>${cs.length?`<ul>${rows}</ul>`:'<p class="none">No copies recorded for this title.</p>'}${rs?`<p class="none">${rs} pending reservation${rs>1?'s':''}</p>`:''}</article>`}).join('');
+}
+function kpi(){const t=today(),i=S.d.issue.filter(x=>x.status==='Issued'),od=i.filter(x=>x.due_date<t).length,fn=S.d.fine.filter(x=>x.paid==='Unpaid').reduce((a,x)=>a+Number(x.amount||0),0),av=S.d.copy.filter(x=>x.status==='Available').length;
+ const k=[['Titles',S.d.book.length],['Copies available',av+' / '+S.d.copy.length],['Active members',S.d.member.filter(m=>m.status==='Active').length],['Open loans',i.length],['Overdue',od,od>0],['Unpaid fines',fn,fn>0]];
+ document.getElementById('kpi').innerHTML=k.map(x=>`<div class="${x[2]?'hot':''}"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('')}
+function render(){
+ nav();kpi();avail();const e=E[cur];
+ document.getElementById('view').innerHTML=`<div class="bar"><h2>${e.n}</h2><input id="q" type="search" placeholder="Search ${e.n.toLowerCase()}" value="${esc(q)}" aria-label="Search"><button class="btn p" data-a="add">Add ${e.n.replace(/s$/,'').toLowerCase()}</button></div>${form()}<div id="tbl">${table()}</div>`;
+}
+function used(en,id){for(const o of ORDER)for(const f of E[o].f)if(f.t==='f'&&f.x===en&&S.d[o].some(r=>r[f.k]===id))return E[o].n;return null}
+function doReturn(id){
+ const i=find('issue',id);if(!i)return;const t=today();
+ const late=Math.max(0,Math.round((new Date(t)-new Date(i.due_date))/864e5)),fine=late*2;
+ i.return_date=t;i.status='Returned';const c=find('copy',i.copy_id);if(c)c.status='Available';
+ add('return',{issue_id:id,return_date:t,condition:'Good',fine});
+ if(fine>0)add('fine',{member_id:i.member_id,issue_id:id,amount:fine,reason:'Late',paid:'Unpaid',pay_date:''});
+ save();render();toast(fine?`Returned. Late fine of ${fine} recorded.`:'Returned on time.');
+}
+document.addEventListener('click',ev=>{
+ const b=ev.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id;
+ if(a==='av'){document.getElementById('avail').scrollIntoView({behavior:'smooth'});document.getElementById('aq').focus({preventScroll:true})}
+ else if(a==='nav'){cur=b.dataset.e;edit=null;q='';render();if(b.dataset.s)document.getElementById('desk').scrollIntoView({behavior:'smooth'})}
+ else if(a==='add'){edit='new';render();document.querySelector('#f input,#f select')?.focus()}
+ else if(a==='edit'){edit=id;render();document.getElementById('f')?.scrollIntoView({block:'nearest'})}
+ else if(a==='cancel'){edit=null;render()}
+ else if(a==='ret')doReturn(id);
+ else if(a==='pay'){const r=find('fine',id);r.paid='Paid';r.pay_date=today();save();render();toast('Fine marked as paid.')}
+ else if(a==='del'){
+  const u=used(cur,id);if(u){toast('Cannot delete: still used in '+u+'.');return}
+  if(!confirm('Delete this record?'))return;
+  S.d[cur]=S.d[cur].filter(r=>r[pk(cur)]!==id);save();render();toast('Deleted.');
+ }
+});
+document.addEventListener('input',ev=>{if(ev.target.id==='q'){q=ev.target.value.toLowerCase();document.getElementById('tbl').innerHTML=table()}});
+document.addEventListener('submit',ev=>{
+ ev.preventDefault();const en=cur,fd=new FormData(ev.target),id=ev.target.dataset.id,row={};
+ E[en].f.forEach(f=>{let v=fd.get(f.k)??'';if(f.t==='n'&&v!=='')v=Number(v);row[f.k]=v});
+ if(id){Object.assign(find(en,id),row);toast('Changes saved.')}
+ else{
+  if(en==='book'&&find('book',row.isbn)){toast('A book with this ISBN already exists.');return}
+  if(en==='issue'){const c=find('copy',row.copy_id);if(c.status!=='Available'){toast('That copy is not available to issue.');return}c.status='Issued'}
+  add(en,row);toast('Added.');
+ }
+ edit=null;save();render();
+});
+document.addEventListener('input',ev=>{if(ev.target.id==='aq')avail()});
+(()=>{const st=document.getElementById('stage');if(!st||!matchMedia('(hover:hover)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+document.addEventListener('mousemove',ev=>{const x=ev.clientX/innerWidth-.5,y=ev.clientY/innerHeight-.5;st.style.setProperty('--rx',(-12-y*18).toFixed(1)+'deg');st.style.setProperty('--ry',(20+x*30).toFixed(1)+'deg')})})();
+S=load();if(!S)seed();render();
+</script>
+</body>
+</html>
